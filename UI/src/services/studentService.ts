@@ -11,6 +11,14 @@ const getStudents = async () => {
         throw error;
     }
 };
+const getStudentsByCategory = async (id: number) => {
+    try {
+        const response = await axios.get(`${API_URL}/category/${id}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
 
 const addStudent = async (student: student) => {
     try {
@@ -29,9 +37,19 @@ const voteStudent = async (studentId: number) => {
         throw error;
     }
 };
+const deleteStudent = async (studentId: number) => {
+    try {
+        const response = await axios.delete(`${API_URL}/${studentId}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
 
 export default {
     getStudents,
+    getStudentsByCategory,
     addStudent,
+    deleteStudent,
     voteStudent
 };

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { student } from "../types/student";
 import ConfirmationModal from "./ConfirmationModal";
-import axios from "axios";
+import studentService from "../services/studentService";
 
 type PropsData = {
   student: student,
-  onVote: (status: boolean, message : string) => void
+  onVote: (status: boolean, message: string) => void
 
 }
 const StudentCard = ({ student, onVote }: PropsData) => {
@@ -17,11 +17,9 @@ const StudentCard = ({ student, onVote }: PropsData) => {
 
   const handleConfirmVote = () => {
     setIsModalOpen(false);
-    axios.put('http://localhost:5000/students/vote/' + student.id)
-      .then(() => {
-        onVote(true, `You have successfully voted for ${student.name}!`);
-      })
-      .catch(error => {
+    studentService.voteStudent(student.id).then(() => {
+      onVote(true, `You have successfully voted for ${student.name}!`);
+    }).catch(error => {
         console.error('There was an error fetching the students!', error);
       });
   };

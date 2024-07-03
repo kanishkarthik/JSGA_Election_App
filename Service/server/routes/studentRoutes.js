@@ -33,7 +33,7 @@ router.put('/vote/:id', (req, res) => {
     });
 });
 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const studentId = req.params.id;
     Student.deleteStudent(studentId, (err, results) => {
         if (err) return res.status(500).send(err);

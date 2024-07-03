@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import axios from 'axios';
 import { student } from '../types/student';
+import studentService from '../services/studentService';
 
 // create type for the argument
 export type StudentFormProps = {
@@ -41,7 +41,7 @@ const StudentForm = ({onSuccess} : StudentFormProps) => {
         // addStudent(newStudent);
         newStudent.elected = newStudent.elected == "on" ? 'Y' : '';
         //newStudent.image = newStudent.image?.toString().split('data:image/jpeg;base64,')[1];
-        axios.post('http://localhost:5000/students', newStudent)
+        studentService.addStudent(newStudent)
         .then(response => {
             setNewStudent({
                 academic_year: year,
@@ -55,7 +55,7 @@ const StudentForm = ({onSuccess} : StudentFormProps) => {
             if(photoInputRef != null && photoInputRef.current != null){
                 (photoInputRef.current as HTMLInputElement).value  = '';
             }
-            onSuccess(response.data["id"]);
+            onSuccess(response["id"]);
         })
         .catch(error => {
             console.error('There was an error adding the student!', error);

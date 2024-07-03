@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Button, Drawer, Typography } from '@mui/material';
-import axios from 'axios';
 
 import StudentTable from './StudentTable';
 import { student } from '../types/student';
 import StudentForm from './StudentForm';
+import studentService from '../services/studentService';
 
 const initialValues: student[] = [];
 
@@ -15,10 +15,10 @@ const ManageStudents = () => {
   const [fetchStudent, setFetchStudent] = useState("");
 
   useEffect(() => {
-    axios.get('http://localhost:5000/students')
-      .then(response => {
-        if (response && Array.isArray(response.data)) {
-          setStudents(response.data);
+    studentService.getStudents()
+      .then(data => {
+        if (data && Array.isArray(data)) {
+          setStudents(data);
         }
       })
       .catch(error => {
@@ -27,7 +27,7 @@ const ManageStudents = () => {
   }, [fetchStudent]);
 
   const handleDeleteStudent = (studentId: number) => {
-    axios.delete('http://localhost:5000/students/delete/'+studentId)
+    studentService.deleteStudent(studentId)
       .then(() => {
         setSuccessMessage('Student deleted successfully!');
         setFetchStudent(studentId.toString());   

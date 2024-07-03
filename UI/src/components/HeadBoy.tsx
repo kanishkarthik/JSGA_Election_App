@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import StudentCard from './StudentCard';
 import { student } from '../types/student';
-import axios from 'axios';
+import studentService from '../services/studentService';
 
 const HeadBoy = () => {
   const [studentList, setStudentList] = useState([] as student[]);
   const [successMessage, setSuccessMessage] = useState("");
   useEffect(() => {
-    axios.get('http://localhost:5000/students/category/1')
-      .then(response => {
-        if (response && Array.isArray(response.data)) {
-          setStudentList(response.data);
+    studentService.getStudentsByCategory(1)
+      .then(data => {
+        if (data && Array.isArray(data)) {
+          setStudentList(data);
         }
       })
       .catch(error => {
