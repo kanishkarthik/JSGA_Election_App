@@ -43,10 +43,10 @@ const StudentTable = ({ students, onDeleteStudent }: Props) => {
               <td>{student.academic_year}</td>
               <td><strong>{student.category_name}</strong></td>
               <td>{student.name}</td>
-              <td><img src={student.photo} title={`${student.name}`} alt={`${student.name}'s photo`} className="student-photo" /></td>
-              <td>{student.grade}</td>
-              <td>{student.total_vote}</td>
-              <td>
+              <td className="center-align"><img src={student.photo} title={`${student.name}`} alt={`${student.name}'s photo`} className="student-photo" /></td>
+              <td className="right-align">{student.grade}</td>
+              <td className="right-align">{student.total_vote}</td>
+              <td className="center-align">
                 {/* <button>Edit</button> |  */}
                 <button onClick={() => handleDelete(student.id)}>Delete</button>
               </td>

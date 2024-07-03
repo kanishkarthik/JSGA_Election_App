@@ -1,23 +1,34 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { student } from '../types/student';
 import studentService from '../services/studentService';
+import categoryService from '../services/categoryService';
 
 // create type for the argument
 export type StudentFormProps = {
-    onSuccess : (id: string) => void
+    onSuccess: (id: string) => void
 }
-
-const StudentForm = ({onSuccess} : StudentFormProps) => {
-    const year = new Date().getFullYear();
+const currentYear = new Date().getFullYear();
+const grades: number[] = [...Array(12).keys()].map((i: number) => i + 1).reverse();
+const StudentForm = ({ onSuccess }: StudentFormProps) => {
+    const [categories, setCategories] = useState([]);
     const photoInputRef = useRef(null);
 
+    useEffect(() => {
+        categoryService.getCategories()
+            .then((categories) => {
+                setCategories(categories);
+            }).catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
     const [newStudent, setNewStudent] = useState({
-        academic_year: year,
-        category_id : 0,
-        name : "",
-        rollno : "",
-        image :  null,
-        grade : ""
+        academic_year: currentYear,
+        category_id: 0,
+        name: "",
+        rollno: "",
+        image: null,
+        grade: ""
     } as student);
 
     const handleChange = (e: any) => {
@@ -36,32 +47,32 @@ const StudentForm = ({onSuccess} : StudentFormProps) => {
         }
     };
 
-    const handleSubmit = (e : any) => {
+    const handleSubmit = (e: any) => {
         e.preventDefault();
         // addStudent(newStudent);
         newStudent.elected = newStudent.elected == "on" ? 'Y' : '';
         //newStudent.image = newStudent.image?.toString().split('data:image/jpeg;base64,')[1];
         studentService.addStudent(newStudent)
-        .then(response => {
-            setNewStudent({
-                academic_year: year,
-                category_id : 0,
-                name : "",
-                rollno : "",
-                image :  "",
-                grade : "",
-                elected: ""
-            } as student);
-            if(photoInputRef != null && photoInputRef.current != null){
-                (photoInputRef.current as HTMLInputElement).value  = '';
-            }
-            onSuccess(response["id"]);
-        })
-        .catch(error => {
-            console.error('There was an error adding the student!', error);
-        });        
-      };
-      
+            .then(response => {
+                setNewStudent({
+                    academic_year: currentYear,
+                    category_id: 0,
+                    name: "",
+                    rollno: "",
+                    image: "",
+                    grade: "",
+                    elected: ""
+                } as student);
+                if (photoInputRef != null && photoInputRef.current != null) {
+                    (photoInputRef.current as HTMLInputElement).value = '';
+                }
+                onSuccess(response["id"]);
+            })
+            .catch(error => {
+                console.error('There was an error adding the student!', error);
+            });
+    };
+
 
     return (
         <form onSubmit={handleSubmit} className="student-form">
@@ -79,6 +90,7 @@ const StudentForm = ({onSuccess} : StudentFormProps) => {
             </div>
             <div className="form-row">
                 <label className="form-label">Evaluation Category:</label>
+
                 <select
                     name="category_id"
                     onChange={handleChange}
@@ -86,8 +98,10 @@ const StudentForm = ({onSuccess} : StudentFormProps) => {
                     required
                 >
                     <option value="">Select Category</option>
-                    <option value="1">Head Boy</option>
-                    <option value="2">Head Girl</option>
+                    {
+                        categories.map((category: any) => <option value={category.id}>{category.name}</option>)
+                    }
+
                 </select>
             </div>
             <div className="form-row">
@@ -125,14 +139,26 @@ const StudentForm = ({onSuccess} : StudentFormProps) => {
             </div>
             <div className="form-row">
                 <label className="form-label">Grade:</label>
-                <input
+                <select
+                    name="grade"
+                    onChange={handleChange}
+                    value={newStudent.grade}
+                    required
+                >
+                    <option value="">Select Grade</option>
+                    {
+                        grades.map((grade: any) => <option value={grade}>{grade}</option>)
+                    }
+
+                </select>
+                {/* <input
                     type="text"
                     name="grade"
                     value={newStudent.grade}
                     onChange={handleChange}
                     autoComplete='off'
                     required
-                />
+                /> */}
             </div>
             <div className="form-row">
                 <label className="form-label">Elected:</label>
@@ -142,7 +168,7 @@ const StudentForm = ({onSuccess} : StudentFormProps) => {
                     onChange={handleChange}
                 />
             </div>
-            <br/>
+            <br />
             <button className='add-student-btn' type="submit">Add Student</button>
         </form>
     )

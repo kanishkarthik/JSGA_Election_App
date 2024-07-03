@@ -6,9 +6,9 @@ import studentService from "../services/studentService";
 type PropsData = {
   student: student,
   onVote: (status: boolean, message: string) => void
-
+  categoryMessage: string  
 }
-const StudentCard = ({ student, onVote }: PropsData) => {
+const StudentCard = ({ student, onVote , categoryMessage}: PropsData) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleVoteClick = () => {
@@ -33,7 +33,7 @@ const StudentCard = ({ student, onVote }: PropsData) => {
       <div className="student-details">
         <h3>{student.name}</h3>
         <p>Grade: {student.grade}</p>
-        {student.elected && <span className="student-elected">Elected as Head Boy</span>}
+        {student.elected && <span className="student-elected">Elected as {categoryMessage}</span>}
         {!student.elected && <button onClick={handleVoteClick}>Vote</button>}
       </div>
       <ConfirmationModal

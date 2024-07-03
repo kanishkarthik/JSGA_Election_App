@@ -12,19 +12,39 @@ body {
 }
 
 .header {
-  background: #333;
+  background: #164895;
   color: #fff;
   display: flex;
   align-items: center;
-  padding: 1rem;
-}
-.header h1{
-  left: 10%;
-  position: relative;
+  /* padding: 1rem; */
+  height: 150px;
 }
 
+.header img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-left: 20px;
+
+}
+
+.header h1 {
+  left: 10%;
+  position: relative;
+  color: #fff !important;
+}
+
+/* h1,
+h2,
+h3,
+h4 {
+  color: #1976d2;
+} */
+
 .logo {
-  height: 40px;
+  /* height: 40px; */
+  width: 150px;
+  height: auto;
   margin-right: 1rem;
 }
 
@@ -35,8 +55,8 @@ body {
 
 .sidebar {
   width: 250px;
-  height: 100vh;
-  background-color: #282c34;
+  height: 100%;
+  background-color: #164895;
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -77,10 +97,15 @@ body {
   flex: 1;
   padding: 2rem;
   overflow-y: auto;
+  background-color: #a9d4fa;
+}
+
+.content .MuiBox-root {
+  padding: 0 !important;
 }
 
 .footer {
-  background: #333;
+  background: #164895;
   color: #fff;
   text-align: center;
   padding: 1rem;
@@ -93,21 +118,41 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  background-color: #FFF8DC;
 }
 
-.student-table th, .student-table td {
+.student-table th,
+.student-table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
 }
 
 .student-table th {
+  background-color: #1976d2;
+  text-align: center;
+  color: #fff;
+}
+
+.student-table tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
+.student-table tr:nth-child(odd) {
+  background-color: #FFF8DC;
+}
+
+.student-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+.student-table tr:not(:first-child):hover {
+  background-color: #f5f5f5;
+}
+
 .student-photo {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -123,7 +168,8 @@ form.student-form {
 }
 
 .form-row label {
-  flex: 0 0 33.33%; /* 4 columns out of 12 */
+  flex: 0 0 33.33%;
+  /* 4 columns out of 12 */
   margin-right: 10px;
   font-weight: bold;
   text-align: left !important;
@@ -132,7 +178,8 @@ form.student-form {
 .form-row input[type="text"],
 .form-row select,
 .form-row input[type="file"] {
-  flex: 0 0 66.67%; /* 8 columns out of 12 */
+  flex: 0 0 66.67%;
+  /* 8 columns out of 12 */
   padding: 8px;
   margin-top: 2px;
   border: 1px solid #ddd;
@@ -141,7 +188,7 @@ form.student-form {
 
 button {
   padding: 10px 20px;
-  background-color: #333;
+  background-color: #164895;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -153,7 +200,8 @@ button {
 button:hover {
   background-color: #555;
 }
-.add-student-btn{
+
+.add-student-btn {
   float: right;
 }
 
@@ -161,12 +209,13 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .student-card {
   display: flex;
   align-items: center;
-  background: #fff;
+  background: #54ABEE;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 1rem;
@@ -192,12 +241,15 @@ button:hover {
 .student-details p {
   margin: 0.5rem 0;
 }
-.student-elected{
-  color: red;
+
+.student-elected {
+  color: floralwhite;
+  font-weight: bold;
 }
+
 .student-card button {
   padding: 10px 20px;
-  background-color: #333;
+  background-color: #164895;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -222,7 +274,7 @@ button:hover {
 }
 
 .vote-modal {
-  background: white;
+  background: #F0F8FF;
   padding: 2rem;
   border-radius: 8px;
   max-width: 500px;
@@ -238,19 +290,31 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
   margin-top: 1rem;
 }
 
 .modal-buttons button {
   padding: 10px 20px;
-  background-color: #333;
+  background-color: #164895;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
+.modal-buttons button:nth-child(2) {
+  background-color: #9c27b0;
+}
+
 .modal-buttons button:hover {
   background-color: #555;
+}
+
+.right-align {
+  text-align: right !important;
+}
+
+.center-align {
+  text-align: center !important;
 }

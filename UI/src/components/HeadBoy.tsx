@@ -33,7 +33,7 @@ const HeadBoy = () => {
       {successMessage && <div className="success-message">{successMessage}</div>}
       <div className="student-cards-container">
         {studentList.map((student: student) => (
-          <StudentCard key={student.id} student={student} onVote={handleVote} />
+          <StudentCard key={student.id} student={student} onVote={handleVote} categoryMessage={"Head Boy"} />
         ))}
       </div>
     </div>
