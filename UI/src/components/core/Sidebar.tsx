@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
-import PeopleIcon from '@mui/icons-material/People';
 import SchoolIcon from '@mui/icons-material/School';
 import BoyIcon from '@mui/icons-material/Boy';
 import GirlIcon from '@mui/icons-material/Girl';

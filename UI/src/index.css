@@ -113,14 +113,41 @@ h4 {
   bottom: 0;
   width: 100%;
 }
+/* Assuming you have a class name for your grid container */
+.grid-container {
+  min-height: 400px; /* Set your desired minimum height */
+  max-height: 800px; /* Optional: set a maximum height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ccc; /* Optional: add a border for better visibility */
+  padding: 10px; /* Optional: add some padding */
+  margin: 10px 0; /* Optional: add some margin */
+}
+/* Optional: style the scrollbar */
+.grid-container::-webkit-scrollbar {
+  width: 20px;
+}
 
+.grid-container::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar */
+  border-radius: 4px; /* Rounded corners for the scrollbar thumb */
+}
+
+.grid-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color on hover */
+}
 .student-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
-  background-color: #FFF8DC;
+  /* margin-top: 20px; */
+  /* background-color: #FFF8DC; */
 }
-
+/* Fixed header */
+thead th {
+  position: sticky;
+  top: 0;
+  background: #f1f1f1; /* Background color for the sticky header */
+  z-index: 1; /* Ensure it stays above the rest of the content */
+}
 .student-table th,
 .student-table td {
   border: 1px solid #ddd;
@@ -133,8 +160,7 @@ h4 {
   text-align: center;
   color: #fff;
 }
-
-.student-table tr:nth-child(even) {
+/* .student-table tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
@@ -144,9 +170,9 @@ h4 {
 
 .student-table tr:hover {
   background-color: #f5f5f5;
-}
+} */
 
-.student-table tr:not(:first-child):hover {
+.student-table tr:hover { /*:not(:first-child)*/
   background-color: #f5f5f5;
 }
 

@@ -16,15 +16,40 @@ const Footer = () => {
         }}
       >
         <Typography variant="body2">
-          &copy; {new Date().getFullYear()} JS GLOBAL ACADEMY. All rights reserved. Application Build by <strong>Kanish Karthik</strong> Dad.
+          &copy; {new Date().getFullYear()} JS GLOBAL ACADEMY. All rights reserved. Application Build by <strong>Kanish Karthik</strong> Dad <small><strong>(Kumaresan Govindan)</strong></small>.
         </Typography>
       </Box>
       <footer className="footer">
         <p>© {new Date().getFullYear()} JS GLOBAL ACADEMY. All rights reserved.</p>
-        <p>Application Build by <strong>Kanish Karthik</strong> Dad</p>
+        <p>Application Build by <strong>Kanish Karthik</strong> Dad <small><strong>(Kumaresan Govindan)</strong></small></p>
       </footer>
     </>
   );
 };
+
+// const Footer = () => {
+//   return (
+//       <Box
+//           component="footer"
+//           sx={{
+//               py: 2,
+//               px: 2,
+//               mt: 'auto',
+//               backgroundColor: 'primary.main',
+//               color: 'white',
+//               textAlign: 'center',
+//           }}
+//       >
+//           <Container maxWidth="lg">
+//               <Typography variant="body2" component="p">
+//                   © {new Date().getFullYear()} JS GLOBAL ACADEMY. All rights reserved.
+//               </Typography>
+//               <Typography variant="body2" component="p">
+//                   Application Built by <strong>Kanish Karthik</strong> Dad <small><strong>(Kumaresan Govindan)</strong></small>
+//               </Typography>
+//           </Container>
+//       </Box>
+//   );
+// };
 
 export default Footer;

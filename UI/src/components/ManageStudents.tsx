@@ -122,7 +122,7 @@ const ManageStudents = () => {
             <strong>Add Student</strong>
           </Button>
           <Box display="flex" gap={2}>
-            {/* <FormControl variant="outlined">
+            <FormControl variant="outlined">
               <InputLabel>Academic Year</InputLabel>
               <Select
                 value={filterAcademicYear}
@@ -136,7 +136,7 @@ const ManageStudents = () => {
                   academicYears.map((year: number) => <MenuItem value={year}>{year}</MenuItem>)
                 }
               </Select>
-            </FormControl> */}
+            </FormControl>
             <FormControl variant="outlined">
               <InputLabel>Evaluation Category</InputLabel>
               <Select
@@ -172,7 +172,7 @@ const ManageStudents = () => {
             </Button>
           </Box>
         </Box>
-        <Box>
+        <Box className='grid-container'>
           <StudentTable students={students} onDeleteStudent={handleDeleteStudent} />
         </Box>
         <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
