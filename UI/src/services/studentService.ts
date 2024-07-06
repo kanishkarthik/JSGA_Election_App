@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { student } from '../types/student';
+import config from '../config';
 
-const API_URL = 'http://localhost:5000/students'; 
+const API_URL = `${config.serviceApiUrl}/students`; 
 
 const getStudents = async () => {
     try {

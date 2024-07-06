@@ -1,6 +1,7 @@
 import axios from 'axios';
+import config from '../config';
 
-const API_URL = 'http://localhost:5000/categories'; 
+const API_URL = `${config.serviceApiUrl}/categories`; 
 
 const getCategories = async () => {
     try {

@@ -10,6 +10,7 @@ import Tulip from './components/Tulip';
 import Iris from './components/Iris';
 import Orchid from './components/Orchid';
 import Daffodils from './components/Daffodils';
+import Home from './components/Home';
 
 const App = () => {
   
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/school-election/iris" element={<Iris/>} />
           <Route path="/school-election/orchid" element={<Orchid/>} />
           <Route path="/school-election/daffodils" element={<Daffodils/>} />
+          <Route path="/school-election" element={<Home/>} />
         </Routes>
       </Layout>
     </>

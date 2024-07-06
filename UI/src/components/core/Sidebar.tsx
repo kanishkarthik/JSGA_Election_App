@@ -1,18 +1,38 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
 import SchoolIcon from '@mui/icons-material/School';
 import BoyIcon from '@mui/icons-material/Boy';
 import GirlIcon from '@mui/icons-material/Girl';
-import LocalFloristIcon  from '@mui/icons-material/LocalFlorist';
+import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
 import PaletteIcon from '@mui/icons-material/Palette';
+import PasswordPromptDialog from '../PasswordPromptDialog';
 
 const Sidebar = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleManagePayments = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+  };
+
+  const handleConfirmPassword = (password: string) => {
+    if (password === 'Admin@2021') {
+      navigate('/school-election/manage-students');
+    }
+    setIsDialogOpen(false);
+  };
+
   return (
     <div className="sidebar">
       <List>
         <Divider />
-        <ListItem button component={Link} to="/school-election/manage-students">
+        <ListItem button onClick={handleManagePayments}>
           <ListItemIcon className="sidebar-icon">
             <SchoolIcon />
           </ListItemIcon>
@@ -88,6 +108,11 @@ const Sidebar = () => {
           <ListItemText primary="About Us" />
         </ListItem> */}
       </List>
+      <PasswordPromptDialog
+        open={isDialogOpen}
+        onClose={handleCloseDialog}
+        onConfirm={handleConfirmPassword}
+      />
     </div>
   );
 };

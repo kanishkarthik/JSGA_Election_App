@@ -17,10 +17,10 @@ body {
   display: flex;
   align-items: center;
   /* padding: 1rem; */
-  height: 150px;
+  /* height: 150px; */
 }
 
-.header img {
+.header .img {
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -74,7 +74,7 @@ h4 {
 }
 
 .sidebar .MuiListItem-root:hover {
-  background-color: #3a3f47;
+  background-color: #034180;
 }
 
 .sidebar .Mui-selected {
@@ -114,7 +114,7 @@ h4 {
   width: 100%;
 }
 /* Assuming you have a class name for your grid container */
-.grid-container {
+.grid-container2 {
   min-height: 400px; /* Set your desired minimum height */
   max-height: 800px; /* Optional: set a maximum height */
   overflow-y: auto; /* Enable vertical scrolling */
@@ -142,12 +142,12 @@ h4 {
   /* background-color: #FFF8DC; */
 }
 /* Fixed header */
-thead th {
+/* thead th {
   position: sticky;
   top: 0;
-  background: #f1f1f1; /* Background color for the sticky header */
-  z-index: 1; /* Ensure it stays above the rest of the content */
-}
+  background: #f1f1f1; 
+  z-index: 1;
+} */
 .student-table th,
 .student-table td {
   border: 1px solid #ddd;
@@ -249,8 +249,8 @@ button:hover {
 }
 
 .student-card img.student-photo {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   border-radius: 50%;
   margin-right: 1rem;
@@ -343,4 +343,10 @@ button:hover {
 
 .center-align {
   text-align: center !important;
+}
+.upper{
+  text-transform: capitalize;
+}
+.grade{
+  
 }

@@ -7,10 +7,10 @@ const Student = {
         const query = `SELECT e.*,c.name as category_name,
         e.student_name as name, e.image as photo,
         e.student_roll_no as rollno FROM evaluation e 
-        inner join evaluation_category c on c.id=e.category_id
-        where e.academic_year=`+academic_year+`
+        inner join evaluation_category c on c.id=e.category_id        
         order by e.academic_year desc,e.category_id,e.grade desc,e.student_name`;
         db.query(query, callback);
+        // where e.academic_year=`+academic_year+`
     },
     getAllStudentsByCateogry: (categoryId, callback) => {
         academic_year = new Date().getFullYear();

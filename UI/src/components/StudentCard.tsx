@@ -32,7 +32,7 @@ const StudentCard = ({ student, onVote , categoryMessage}: PropsData) => {
       <img src={student.image?.toString()} alt={student.name} className="student-photo" />
       <div className="student-details">
         <h3>{student.name}</h3>
-        <p>Grade: {student.grade}</p>
+        <p>Grade: <span className="grade">{student.grade}</span></p>
         {student.elected && <span className="student-elected">Elected as {categoryMessage}</span>}
         {!student.elected && <button onClick={handleVoteClick}>Vote</button>}
       </div>

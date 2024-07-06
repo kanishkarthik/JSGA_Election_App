@@ -4,5 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/school-election/'
+  base: '/school-election/',
+  define : {
+    'process.env': process.env
+  }
 })

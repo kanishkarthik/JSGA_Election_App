@@ -1,14 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
+import { TextField, Select, MenuItem, FormControl, InputLabel, Button, Box, Checkbox, FormControlLabel } from '@mui/material';
 import { student } from '../types/student';
 import studentService from '../services/studentService';
 import categoryService from '../services/categoryService';
 
-// create type for the argument
 export type StudentFormProps = {
     onSuccess: (id: string) => void
 }
+
 const currentYear = new Date().getFullYear();
 const grades: number[] = [...Array(12).keys()].map((i: number) => i + 1).reverse();
+
 const StudentForm = ({ onSuccess }: StudentFormProps) => {
     const [categories, setCategories] = useState([]);
     const photoInputRef = useRef(null);
@@ -28,11 +30,15 @@ const StudentForm = ({ onSuccess }: StudentFormProps) => {
         name: "",
         rollno: "",
         image: null,
-        grade: ""
+        grade: "",
+        elected: ""
     } as student);
 
     const handleChange = (e: any) => {
-        const { name, value } = e.target;
+        let { name, value } = e.target;
+        if(['name', 'rollno'].includes(name) && value){
+            value = (value as string).toUpperCase();
+        }
         setNewStudent({ ...newStudent, [name]: value });
     };
 
@@ -49,9 +55,7 @@ const StudentForm = ({ onSuccess }: StudentFormProps) => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        // addStudent(newStudent);
-        newStudent.elected = newStudent.elected == "on" ? 'Y' : '';
-        //newStudent.image = newStudent.image?.toString().split('data:image/jpeg;base64,')[1];
+        newStudent.elected = newStudent.elected === "on" ? 'Y' : '';
         studentService.addStudent(newStudent)
             .then(response => {
                 setNewStudent({
@@ -73,104 +77,122 @@ const StudentForm = ({ onSuccess }: StudentFormProps) => {
             });
     };
 
-
     return (
-        <form onSubmit={handleSubmit} className="student-form">
-            <div className="form-row">
-                <label className="form-label">Academic Year:</label>
-                <input
-                    type="text"
-                    name="academic_year"
-                    value={newStudent.academic_year}
-                    readOnly
-                    autoComplete='off'
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            <div className="form-row">
-                <label className="form-label">Evaluation Category:</label>
-
-                <select
+        <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2,
+                maxWidth: 600,
+                margin: 'auto',
+                padding: 3,
+                border: '1px solid #ccc',
+                borderRadius: 2
+            }}
+        >
+            <TextField
+                label="Academic Year"
+                name="academic_year"
+                value={newStudent.academic_year}
+                InputProps={{
+                    readOnly: true,
+                }}
+                variant="outlined"
+                fullWidth
+                required
+            />
+            <FormControl fullWidth variant="outlined">
+                <InputLabel id="category-label">Evaluation Category</InputLabel>
+                <Select
+                    labelId="category-label"
                     name="category_id"
-                    onChange={handleChange}
                     value={newStudent.category_id}
+                    onChange={handleChange}
+                    label="Evaluation Category"
                     required
                 >
-                    <option value="">Select Category</option>
-                    {
-                        categories.map((category: any) => <option value={category.id}>{category.name}</option>)
-                    }
-
-                </select>
-            </div>
-            <div className="form-row">
-                <label className="form-label">Student Name:</label>
-                <input
-                    type="text"
-                    name="name"
-                    value={newStudent.name}
-                    onChange={handleChange}
-                    autoComplete='off'
-                    required
-                />
-            </div>
-            <div className="form-row">
-                <label className="form-label">Roll No:</label>
-                <input
-                    type="text"
-                    name="rollno"
-                    value={newStudent.rollno}
-                    onChange={handleChange}
-                    autoComplete='off'
-                    required
-                />
-            </div>
-            <div className="form-row">
-                <label className="form-label">Student Photo:</label>
+                    <MenuItem value="">
+                        <em>Select Category</em>
+                    </MenuItem>
+                    {categories.map((category: any) => (
+                        <MenuItem key={category.id} value={category.id}>
+                            {category.name}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+            <TextField
+                label="Student Name"
+                name="name"
+                value={newStudent.name}
+                onChange={handleChange}
+                autoComplete='off'
+                variant="outlined"
+                className='upper'
+                fullWidth
+                required
+            />
+            <TextField
+                label="Roll No"
+                name="rollno"
+                value={newStudent.rollno}
+                onChange={handleChange}
+                autoComplete='off'
+                variant="outlined"
+                className='upper'
+                fullWidth
+                required
+            />
+            <Button
+                variant="contained"
+                component="label"
+                fullWidth
+            >
+                Upload Photo
                 <input
                     type="file"
-                    id="photo"
-                    name="photo"
+                    hidden
                     onChange={handleFileChange}
                     ref={photoInputRef}
                     required
                 />
-            </div>
-            <div className="form-row">
-                <label className="form-label">Grade:</label>
-                <select
+            </Button>
+            <FormControl fullWidth variant="outlined">
+                <InputLabel id="grade-label">Grade</InputLabel>
+                <Select
+                    labelId="grade-label"
                     name="grade"
-                    onChange={handleChange}
                     value={newStudent.grade}
+                    onChange={handleChange}
+                    label="Grade"
                     required
                 >
-                    <option value="">Select Grade</option>
-                    {
-                        grades.map((grade: any) => <option value={grade}>{grade}</option>)
-                    }
-
-                </select>
-                {/* <input
-                    type="text"
-                    name="grade"
-                    value={newStudent.grade}
-                    onChange={handleChange}
-                    autoComplete='off'
-                    required
-                /> */}
-            </div>
-            <div className="form-row">
-                <label className="form-label">Elected:</label>
-                <input
-                    type="checkbox"
-                    name="elected"
-                    onChange={handleChange}
-                />
-            </div>
-            <br />
-            <button className='add-student-btn' type="submit">Add Student</button>
-        </form>
-    )
+                    <MenuItem value="">
+                        <em>Select Grade</em>
+                    </MenuItem>
+                    {grades.map((grade) => (
+                        <MenuItem key={grade} value={grade}>
+                            {grade}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        name="elected"
+                        onChange={handleChange}
+                    />
+                }
+                label="Elected"
+            />
+            <Button variant="contained" color="primary" type="submit">
+                Add Student
+            </Button>
+        </Box>
+    );
 }
+
 export default StudentForm;

@@ -18,8 +18,8 @@ import StudentForm from './StudentForm';
 import categoryService from '../services/categoryService';
 
 const initialValues: student[] = [];
-const currentYear = new Date().getFullYear();
-const academicYears: number[] = [...Array(3).keys()].map((i: number) => currentYear - i);
+// const currentYear = new Date().getFullYear();
+// const academicYears: number[] = [...Array(3).keys()].map((i: number) => currentYear - i);
 const grades: number[] = [...Array(12).keys()].map((i: number) => i + 1).reverse();
 
 const ManageStudents = () => {
@@ -28,7 +28,7 @@ const ManageStudents = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [fetchStudent, setFetchStudent] = useState("");
-  const [filterAcademicYear, setFilterAcademicYear] = useState(0);
+  // const [filterAcademicYear, setFilterAcademicYear] = useState(0);
   const [filterEvaluationCategory, setFilterEvaluationCategory] = useState(0);
   const [filterGrade, setFilterGrade] = useState("");
   const [categories, setCategories] = useState([]);
@@ -84,9 +84,9 @@ const ManageStudents = () => {
   const handleFilter = () => {
     let filteredStudents = [...allStudents];
 
-    if (filterAcademicYear) {
-      filteredStudents = filteredStudents.filter(student => student.academic_year === filterAcademicYear);
-    }
+    // if (filterAcademicYear) {
+    //   filteredStudents = filteredStudents.filter(student => student.academic_year === filterAcademicYear);
+    // }
 
     if (filterEvaluationCategory) {
       filteredStudents = filteredStudents.filter(student => student.category_id === filterEvaluationCategory);
@@ -122,7 +122,7 @@ const ManageStudents = () => {
             <strong>Add Student</strong>
           </Button>
           <Box display="flex" gap={2}>
-            <FormControl variant="outlined">
+            {/* <FormControl variant="outlined">
               <InputLabel>Academic Year</InputLabel>
               <Select
                 value={filterAcademicYear}
@@ -136,7 +136,7 @@ const ManageStudents = () => {
                   academicYears.map((year: number) => <MenuItem value={year}>{year}</MenuItem>)
                 }
               </Select>
-            </FormControl>
+            </FormControl> */}
             <FormControl variant="outlined">
               <InputLabel>Evaluation Category</InputLabel>
               <Select
@@ -144,11 +144,11 @@ const ManageStudents = () => {
                 onChange={(e: any) => setFilterEvaluationCategory(e.target.value)}
                 label="Evaluation Category"
               >
-                <MenuItem value="">
+                <MenuItem key={"category_None"} value="">
                   <em>None</em>
                 </MenuItem>
                 {
-                  categories.map((category: any) => <MenuItem value={category.id}>{category.name}</MenuItem>)
+                  categories.map((category: any) => <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>)
                 }
               </Select>
             </FormControl>
@@ -159,11 +159,11 @@ const ManageStudents = () => {
                 onChange={(e) => setFilterGrade(e.target.value)}
                 label="Grade"
               >
-                <MenuItem value="">
+                <MenuItem key={"Grade_None"} value="">
                   <em>None</em>
                 </MenuItem>
                 {
-                  grades.map((grade: any) => <MenuItem value={grade}>{grade}</MenuItem>)
+                  grades.map((grade: any) => <MenuItem key={grade} value={grade}>{grade}</MenuItem>)
                 }
               </Select>
             </FormControl>
