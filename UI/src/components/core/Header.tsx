@@ -1,34 +1,38 @@
-import { Box, Typography, Avatar, Link } from '@mui/material';
+import { Box, Typography, Avatar } from '@mui/material';
 import schoolLogo from '../../assets/images/logo.jpg';
-import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const navigate = useNavigate();
-  const onHandleNavigation = () => {
-    navigate('/school-election/');
-  }
   return (
     <Box
       component="header"
       display="flex"
       alignItems="center"
       justifyContent="center"
-      className="header"
       p={2}
       color="white"
-      position="relative"
+      className='header'
     >
-      <Box position="absolute" left={16}>
-        <Avatar component={Link} onClick={onHandleNavigation}
+      <Box position="absolute" left={65}>
+        <Avatar
           src={schoolLogo}
           alt="JS GLOBAL ACADEMY : Student Council Election"
-          sx={{ width: 100, height: 100, marginTop: 3.5, cursor: 'pointer' }}
-
+          sx={{ width: 150, height: 150 }}
         />
       </Box>
-      <Typography variant="h4">
-        JS GLOBAL ACADEMY <Typography component="span" variant="subtitle1">(A Senior Secondary School)</Typography>, Kallakurichi
-      </Typography>
+      <Box textAlign="center">
+        <Typography variant="h4">
+          JS GLOBAL ACADEMY
+        </Typography>
+        <Typography variant="subtitle1">
+          A SENIOR SECONDARY SCHOOL
+        </Typography>
+        <Typography variant="h5">
+          Affiliated to CBSE, New Delhi. Affiliation No: 1931299
+        </Typography>
+        <Typography variant="h5">
+          Kallakurichi District - 606 202.
+        </Typography>
+      </Box>
     </Box>
   );
 };
