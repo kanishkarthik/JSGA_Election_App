@@ -1,8 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
-import { TextField, Select, MenuItem, FormControl, InputLabel, Button, Box, Checkbox, FormControlLabel } from '@mui/material';
+import { useState, useRef } from 'react';
+import {
+    TextField, Select, MenuItem, FormControl,
+    InputLabel, Button, Box, Checkbox, FormControlLabel,
+    Divider
+} from '@mui/material';
 import { student } from '../types/student';
 import studentService from '../services/studentService';
-import categoryService from '../services/categoryService';
+// import categoryService from '../services/categoryService';
+import { useAppContext } from '../context/AppContext';
 
 export type StudentFormProps = {
     onSuccess: (id: string) => void
@@ -12,17 +17,19 @@ const currentYear = new Date().getFullYear();
 const grades: number[] = [...Array(12).keys()].map((i: number) => i + 1).reverse();
 
 const StudentForm = ({ onSuccess }: StudentFormProps) => {
-    const [categories, setCategories] = useState([]);
+    const { categories } = useAppContext();
+
+    // const [categories, setCategories] = useState([]);
     const photoInputRef = useRef(null);
 
-    useEffect(() => {
-        categoryService.getCategories()
-            .then((categories) => {
-                setCategories(categories);
-            }).catch((error) => {
-                console.log(error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     categoryService.getCategories()
+    //         .then((categories) => {
+    //             setCategories(categories);
+    //         }).catch((error) => {
+    //             console.log(error);
+    //         });
+    // }, []);
 
     const [newStudent, setNewStudent] = useState({
         academic_year: currentYear,
@@ -36,7 +43,7 @@ const StudentForm = ({ onSuccess }: StudentFormProps) => {
 
     const handleChange = (e: any) => {
         let { name, value } = e.target;
-        if(['name', 'rollno'].includes(name) && value){
+        if (['name', 'rollno'].includes(name) && value) {
             value = (value as string).toUpperCase();
         }
         setNewStudent({ ...newStudent, [name]: value });
@@ -104,7 +111,7 @@ const StudentForm = ({ onSuccess }: StudentFormProps) => {
                 required
             />
             <FormControl fullWidth variant="outlined">
-                <InputLabel id="category-label">Evaluation Category</InputLabel>
+                <InputLabel id="category-label">Evaluation Category *</InputLabel>
                 <Select
                     labelId="category-label"
                     name="category_id"
@@ -188,9 +195,14 @@ const StudentForm = ({ onSuccess }: StudentFormProps) => {
                 }
                 label="Elected"
             />
-            <Button variant="contained" color="primary" type="submit">
-                Add Student
-            </Button>
+            <Divider />
+            <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+                <Button variant="contained"
+                    sx={{ borderRadius: "50px", padding: "20px", width: 200, fontSize: "1rem" }}
+                    color="primary" type="submit">
+                    Add Student
+                </Button>
+            </Box>
         </Box>
     );
 }

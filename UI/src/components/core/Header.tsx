@@ -1,7 +1,12 @@
 import { Box, Typography, Avatar } from '@mui/material';
 import schoolLogo from '../../assets/images/logo.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const onClickHanlder = () => {
+    navigate("/school-election/");
+  };
   return (
     <Box
       component="header"
@@ -15,8 +20,9 @@ const Header = () => {
       <Box position="absolute" left={65}>
         <Avatar
           src={schoolLogo}
+          onClick={onClickHanlder}
           alt="JS GLOBAL ACADEMY : Student Council Election"
-          sx={{ width: 150, height: 150 }}
+          sx={{ width: 150, height: 150, cursor: "pointer" }}
         />
       </Box>
       <Box textAlign="center">

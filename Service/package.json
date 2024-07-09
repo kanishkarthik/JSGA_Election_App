@@ -7,7 +7,7 @@
     "build": "webpack",
     "start": "node server/index.js",
     "startdev": "nodemon server/index.js",
-    "prod": "node dist/final.js"
+    "prod": "node dist/school-election-server.js"
   },
   "keywords": [],
   "author": "",

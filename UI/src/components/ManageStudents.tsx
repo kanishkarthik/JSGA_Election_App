@@ -10,12 +10,15 @@ import {
   Snackbar,
   Alert,
   Select,
+  CircularProgress,
+  IconButton,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import StudentTable from './StudentTable';
 import { student } from '../types/student';
 import studentService from '../services/studentService';
 import StudentForm from './StudentForm';
-import categoryService from '../services/categoryService';
+import { useAppContext } from '../context/AppContext';
 
 const initialValues: student[] = [];
 // const currentYear = new Date().getFullYear();
@@ -31,16 +34,8 @@ const ManageStudents = () => {
   // const [filterAcademicYear, setFilterAcademicYear] = useState(0);
   const [filterEvaluationCategory, setFilterEvaluationCategory] = useState(0);
   const [filterGrade, setFilterGrade] = useState("");
-  const [categories, setCategories] = useState([]);
+  const { categories, loading } = useAppContext();
 
-  useEffect(() => {
-    categoryService.getCategories()
-      .then((categories: any) => {
-        setCategories(categories);
-      }).catch((error) => {
-        console.log(error);
-      });
-  }, []);
   useEffect(() => {
     studentService.getStudents()
       .then(data => {
@@ -77,13 +72,11 @@ const ManageStudents = () => {
     clearSuccessMessage();
   };
 
-
   const toggleDrawer = (open: boolean) => () => {
     setDrawerOpen(open);
   };
   const handleFilter = () => {
     let filteredStudents = [...allStudents];
-
     // if (filterAcademicYear) {
     //   filteredStudents = filteredStudents.filter(student => student.academic_year === filterAcademicYear);
     // }
@@ -104,6 +97,15 @@ const ManageStudents = () => {
   //   setFilterEvaluationCategory(0);
   //   setFilterGrade('');
   // };
+
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
     <div>
       <h2>Manage Students</h2>
@@ -179,6 +181,9 @@ const ManageStudents = () => {
           <div style={{ width: 500, padding: 20 }}>
             <Typography variant="h4">
               <strong>Create Student</strong>
+              <IconButton onClick={toggleDrawer(false)} sx={{ float: "right" }} title='Close' >
+                <CloseIcon />
+              </IconButton>
             </Typography>
             <br />
             <StudentForm onSuccess={handleSuccess} />
