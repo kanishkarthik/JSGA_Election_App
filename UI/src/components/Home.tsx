@@ -8,7 +8,7 @@ const Home = () => {
           Our School
         </Typography>
         <Typography variant="h5" paragraph sx={{ fontWeight: 'bold' }}>
-          JS Global: a Cambridge International school, is a school truly open to all.
+          JS Global ACADEMY: a Cambridge International school, is a school truly open to all.
         </Typography>
         <Typography variant="body1" paragraph sx={{ textAlign: 'justify' }}>
           The school strives to be a globally recognized centre of educational excellence whose students consistently exceed expectations and are committed to addressing the needs. We provide a stimulating learning environment with comprehensive and modern amenities. Our campus is in a safe and secure setting, surrounded by green open spaces and outdoor recreational facilities.

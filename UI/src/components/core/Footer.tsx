@@ -16,12 +16,12 @@ const Footer = () => {
         }}
       >
         <Typography variant="body2">
-          &copy; {new Date().getFullYear()} JS GLOBAL ACADEMY. All rights reserved.The application was built by <strong>Kumaresan Govindan</strong>, a father of <strong>Kanish Karthik</strong>.
+          &copy; {new Date().getFullYear()} JS GLOBAL ACADEMY. All rights reserved.The application was built by <strong>Kumaresan Govindan</strong>, father of <strong>Kanish Karthik</strong>.
         </Typography>
       </Box>
       <footer className="footer">
         <p>© {new Date().getFullYear()} JS GLOBAL ACADEMY. All rights reserved.</p>
-        <p>The application was built by <strong>Kumaresan Govindan</strong>, a father of <strong>Kanish Karthik</strong>.</p>
+        <p>The application was built by <strong>Kumaresan Govindan</strong>, father of <strong>Kanish Karthik</strong>.</p>
       </footer>
     </>
   );
