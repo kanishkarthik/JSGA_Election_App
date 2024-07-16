@@ -40,18 +40,18 @@ const Iris  = () => {
 
   return (
     <div>
-      <h2>Student Election Council - Tulip Captain</h2>
+      <h2>Student Election Council - Iris Captain</h2>
       {successMessage && <div className="success-message">{successMessage}</div>}
       <div className="student-cards-container">
         {studentCaptainList.map((student: student) => (
-          <StudentCard key={student.id} student={student} onVote={handleVote} categoryMessage={"Tulip Captain"} />
+          <StudentCard key={student.id} student={student} onVote={handleVote} categoryMessage={"Iris Captain"} />
         ))}
       </div>
       <Divider/>
-      <h2>Student Election Council - Tulip Vice Captain</h2>
+      <h2>Student Election Council - Iris Vice Captain</h2>
       <div className="student-cards-container">
         {studentViceCaptainList.map((student: student) => (
-          <StudentCard key={student.id} student={student} onVote={handleVote} categoryMessage={"Tulip Vice Captain"}  />
+          <StudentCard key={student.id} student={student} onVote={handleVote} categoryMessage={"Iris Vice Captain"}  />
         ))}
       </div>
     </div>

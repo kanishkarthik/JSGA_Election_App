@@ -3,6 +3,8 @@ import ManageStudents from './components/ManageStudents';
 import HeadBoy from './components/HeadBoy';
 import HeadGirl from './components/HeadGirl';
 import './App.css';
+import './assets/fonts/fonts.css';
+
 import Layout from './components/core/Layout';
 import Sports from './components/Sports';
 import CulturalSecretary from './components/CulturalSecretary';

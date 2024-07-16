@@ -26,11 +26,11 @@ const Header = () => {
         />
       </Box>
       <Box textAlign="center">
-        <Typography variant="h4">
+        <Typography variant="h4" className='school-title'>
           JS GLOBAL ACADEMY
         </Typography>
         <Typography variant="subtitle1">
-          A SENIOR SECONDARY SCHOOL
+          (A SENIOR SECONDARY SCHOOL)
         </Typography>
         <Typography variant="h5">
           Affiliated to CBSE, New Delhi. Affiliation No: 1931299
